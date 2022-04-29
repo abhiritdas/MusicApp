@@ -5,7 +5,7 @@ from pygame import mixer
 
 canvas = tk.Tk()
 canvas.title("Staff Notes")
-canvas.geometry("400x600")
+canvas.geometry("400x400")
 canvas.config(bg = "black")
 rootpath = "C:\\Users\\abhir\\Documents_Local\\MusicApp\\Audio"
 
@@ -17,24 +17,31 @@ class Audio:
         self.random_file = random.choice(os.listdir(rootpath+"\\"+self.random_folder+"\\"))
         self.audio_directory = rootpath+"\\"+self.random_folder+"\\"+self.random_file
 
+class Main():
+    def which_button(self, button_press):
+        if(button_press==folder):
+            print("correct")
+        else:
+            print("try again")
 
-def which_button(button_press):
-    print(button_press)
-
-def play_audio():
-    a = Audio()
-    print(a.random_file)
-    mixer.music.load(a.audio_directory)
-    mixer.music.play()
+    def play_audio(self):
+        a = Audio()
+        global folder
+        folder = a.random_folder
+        print(a.random_file)
+        mixer.music.load(a.audio_directory)
+        mixer.music.play()
     
-Play = tk.Button(canvas, text="PLAY", command=play_audio)
-A = tk.Button(canvas, text ="A", command=lambda m="A": which_button(m))
-B = tk.Button(canvas, text ="B", command=lambda m="B": which_button(m))
-C = tk.Button(canvas, text ="C", command=lambda m="C": which_button(m))
-D = tk.Button(canvas, text ="D", command=lambda m="D": which_button(m))
-E = tk.Button(canvas, text ="E", command=lambda m="E": which_button(m))
-F = tk.Button(canvas, text ="F", command=lambda m="F": which_button(m))
-G = tk.Button(canvas, text ="G", command=lambda m="G": which_button(m))
+main = Main()
+Play = tk.Button(canvas, text="PLAY", command=main.play_audio)
+A = tk.Button(canvas, text ="A", command=lambda m="A": main.which_button(m))
+B = tk.Button(canvas, text ="B", command=lambda m="B": main.which_button(m))
+C = tk.Button(canvas, text ="C", command=lambda m="C": main.which_button(m))
+D = tk.Button(canvas, text ="D", command=lambda m="D": main.which_button(m))
+E = tk.Button(canvas, text ="E", command=lambda m="E": main.which_button(m))
+F = tk.Button(canvas, text ="F", command=lambda m="F": main.which_button(m))
+G = tk.Button(canvas, text ="G", command=lambda m="G": main.which_button(m))
+    
 Play.pack()
 A.pack()
 B.pack()
