@@ -2,6 +2,7 @@ import tkinter as tk
 import os
 import random
 from pygame import mixer
+import time
 
 canvas = tk.Tk()
 canvas.title("Staff Notes")
@@ -18,19 +19,26 @@ class Audio:
         self.audio_directory = rootpath+"\\"+self.random_folder+"\\"+self.random_file
 
 class Main():
+    
     def which_button(self, button_press):
         if(button_press==folder):
-            print("correct")
+            correct_label.pack()
+            canvas.after(2000, self.hide_label, correct_label)
+
         else:
-            print("try again")
+            incorrect_label.pack()
+            canvas.after(2000, self.hide_label, incorrect_label)
 
     def play_audio(self):
         a = Audio()
         global folder
         folder = a.random_folder
-        print(a.random_file)
         mixer.music.load(a.audio_directory)
         mixer.music.play()
+        print(a.random_file)
+
+    def hide_label(self, label):
+        label.forget()
     
 main = Main()
 Play = tk.Button(canvas, text="PLAY", command=main.play_audio)
@@ -41,6 +49,8 @@ D = tk.Button(canvas, text ="D", command=lambda m="D": main.which_button(m))
 E = tk.Button(canvas, text ="E", command=lambda m="E": main.which_button(m))
 F = tk.Button(canvas, text ="F", command=lambda m="F": main.which_button(m))
 G = tk.Button(canvas, text ="G", command=lambda m="G": main.which_button(m))
+correct_label = tk.Label(canvas, text ="CORRECT")
+incorrect_label = tk.Label(canvas, text ="INCORRECT, TRY AGAIN")
     
 Play.pack()
 A.pack()
