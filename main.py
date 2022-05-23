@@ -7,7 +7,7 @@ from pygame import mixer
 canvas = tk.Tk()
 canvas.title("Staff Notes")
 canvas.geometry("400x400")
-canvas.config(bg = "black")
+canvas.config(bg = "navy")
 mixer.init()
 
 class Audio:
